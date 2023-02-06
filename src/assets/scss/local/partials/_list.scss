@@ -1,0 +1,39 @@
+@import 'config/color';
+
+@mixin table {
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 0.3em;
+    }
+
+    table.table tr th,
+    table.table tr td {
+        padding: 8px 15px;
+        vertical-align: middle;
+        height: 70px;
+        border: none;
+        border-bottom: 1px solid #fff;
+    }
+
+    tr {
+        background-color: rgba(232, 234, 238, 0.735);
+        transition: 0.5s;
+
+        &:hover {
+            background-color: $light;
+        }
+    }
+
+    td:first-child {
+        border-left-style: solid;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+    }
+
+    td:last-child {
+        border-right-style: solid;
+        border-bottom-right-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+}

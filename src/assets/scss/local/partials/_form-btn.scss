@@ -1,0 +1,35 @@
+@mixin form-btn($color) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+
+    button {
+        margin: 20px 0px;
+        font-weight: 600;
+        width: 150px;
+        padding: 10px 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: 0.5s;
+
+        &:hover {
+            box-shadow: none;
+        }
+
+        &:active {
+            transform: translateY(5px);
+        }
+    }
+
+    button[type=submit] {
+        background-color: $color;
+        border: none;
+
+        &:hover {
+            box-shadow: rgba(93, 89, 217, 0.54) 0px 3px 8px;
+            color: $color;
+            background: $light;
+        }
+    }
+}

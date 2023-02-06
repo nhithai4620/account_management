@@ -1,0 +1,38 @@
+@import 'local/partials/radio';
+@import 'local/partials/form';
+@import 'local/partials/form-btn';
+@import 'config/color';
+
+.is-invalid {
+    border: 1.5px solid crimson
+}
+
+.invalid-feedback {
+    >div {
+        font-weight: 500;
+    }
+}
+
+.star-invalid {
+    color: crimson !important;
+}
+
+.dob {
+    img {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+form {
+    @include form;
+}
+
+.gender-radio {
+    @include radio;
+}
+
+.form-button {
+    @include form-btn($primary)
+}

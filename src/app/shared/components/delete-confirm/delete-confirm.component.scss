@@ -1,0 +1,46 @@
+@import 'config/color';
+@import 'local/partials/form-btn';
+
+.modal-header,
+.modal-content,
+.modal-body,
+.modal-footer {
+    border: none
+}
+
+.modal-confirm {
+    .modal-header {
+        i {
+            margin: 0 auto;
+            z-index: 9;
+            text-align: center;
+            color: #f15e5e;
+            font-size: 86px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+    }
+
+    .modal-content {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    h4 {
+        text-align: center;
+        font-size: 26px;
+        margin: 30px 0 0px;
+    }
+
+    .modal-body {
+        color: #999;
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .modal-footer {
+        @include form-btn(crimson);
+    }
+}

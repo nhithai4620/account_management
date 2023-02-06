@@ -1,0 +1,247 @@
+<div class="container-fluid">
+  <div class="accounts">
+    <section>
+      <div class="row">
+        <div class="col">
+          <div class="accounts__header">
+            <h1>Accounts</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="row">
+        <div class="col-lg-5 col-md-12">
+          <div class="accounts__search w-100" title="Search some things">
+            <input
+              type="search"
+              class="input-search"
+              placeholder="Search for account"
+              [(ngModel)]="searchValue"
+              #input
+            />
+            <button class="btn-search" (click)="searchValue = input.value">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+          <div class="accounts__toggle-switch">
+            <mat-button-toggle-group [(ngModel)]="view">
+              <mat-button-toggle value="Card" title="Card view mode"
+                ><i class="fa fa-table"></i> Card</mat-button-toggle
+              >
+              <mat-button-toggle value="List"
+                ><i class="fa fa-list" title="List view mode"></i>
+                List</mat-button-toggle
+              >
+            </mat-button-toggle-group>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+          <div class="accounts__add-account">
+            <button title="Add a new account" (click)="openAdd('')">
+              <i class="fa fa-plus mx-1" aria-hidden="true"></i> Add account
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div *ngIf="accountList.length == 0" class="row">
+        <app-empty-data></app-empty-data>
+      </div>
+      <div *ngIf="accountList.length != 0 && view === 'List'" class="row">
+        <div class="col-md-12">
+          <div class="accounts__list table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Account &nbsp;
+                    <i
+                      (click)="setSort('account')"
+                      class="fa fa-sort"
+                      aria-hidden="true"
+                      title="Filter by account"
+                    ></i>
+                  </th>
+                  <th>
+                    Name &nbsp;
+                    <i
+                      (click)="setSort('name')"
+                      class="fa fa-sort"
+                      aria-hidden="true"
+                      title="Filter by name"
+                    ></i>
+                  </th>
+                  <th>
+                    Day of birth &nbsp;
+                    <i
+                      (click)="setSort('dob')"
+                      class="fa fa-sort"
+                      aria-hidden="true"
+                      title="Filter by dob"
+                    ></i>
+                  </th>
+                  <th>
+                    Email &nbsp;
+                    <i
+                      (click)="setSort('email')"
+                      class="fa fa-sort"
+                      aria-hidden="true"
+                      title="Filter by email"
+                    ></i>
+                  </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody
+                class="list"
+                cdkDropList
+                [cdkDropListData]="accountList"
+                (cdkDropListDropped)="drop($event)"
+              >
+                <tr
+                  class="box"
+                  cdkDrag
+                  *ngFor="
+                    let account of accountList
+                      | filter : searchValue
+                      | orderBy : key : reverse
+                      | paginate
+                        : { itemsPerPage: itemsPerPage, currentPage: p }
+                  "
+                >
+                  <td
+                    [routerLink]="['/accounts', account?._id]"
+                    class="pointer"
+                  >
+                    <img [src]="account?.avatar" alt="avatar" class="avatar" />
+                    &nbsp;
+                    {{ account?.account }}
+                  </td>
+                  <td
+                    [routerLink]="['/accounts', account?._id]"
+                    class="pointer"
+                  >
+                    {{ account?.name }}
+                  </td>
+                  <td>{{ account?.dob | date }}</td>
+                  <td>{{ account?.email }}</td>
+                  <td class="accounts__option">
+                    <div class="dropdown">
+                      <i
+                        class="fa fa-ellipsis-v dropbtn"
+                        aria-hidden="true"
+                      ></i>
+                      <div class="dropdown-content">
+                        <ul>
+                          <li [routerLink]="['/accounts', account?._id]">
+                            Details
+                          </li>
+                          <li (click)="openAdd(account)">Update</li>
+                          <li (click)="openDelete(account)">Delete</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- <div class="dropdown" ngbDropdownMenu>
+                      <button
+                        ngbDropdownItem
+                      >
+                        Details
+                      </button>
+                      <button ngbDropdownItem >
+                        Update
+                      </button>
+                      <button ngbDropdownItem>
+                        Note
+                      </button>
+                    </div> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="accountList.length != 0 && view === 'Card'" class="row">
+        <div class="col-md-12" cdkDropListGroup>
+          <div
+            class="cards"
+            cdkDropList
+            [cdkDropListData]="accountList"
+            (cdkDropListDropped)="drop($event)"
+            cdkDropListOrientation="vertical"
+          >
+            <div
+              cdkDrag
+              class="card"
+              *ngFor="
+                let account of accountList
+                  | filter : searchValue
+                  | orderBy : key : reverse
+                  | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+              "
+            >
+              <div class="card__avatar">
+                <img
+                  [routerLink]="['/accounts', account?._id]"
+                  [src]="account?.avatar"
+                  alt="avatar"
+                  class="avatar-card"
+                />
+              </div>
+              <div class="card__infor">
+                <h5 class="font-weight-bold">{{ account?.name }}</h5>
+                <p>{{ account?.account }}</p>
+                <p>{{ account?.dob | date }}</p>
+                <p>{{ account?.email }}</p>
+                <p>{{ account?.gender }}</p>
+              </div>
+              <div class="dropdown">
+                <i class="fa fa-ellipsis-v dropbtn" aria-hidden="true"></i>
+                <div class="dropdown-content">
+                  <ul>
+                    <li [routerLink]="['/accounts', account?._id]">Details</li>
+                    <li (click)="openAdd(account)">Update</li>
+                    <li (click)="openDelete(account)">Delete</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="accountList.length != 0">
+        <div class="col-md-12">
+          <div class="accounts__paginations">
+            <div class="row d-flex justify-content-between">
+              <div class="col-md-3 col-6">
+                <label
+                  >Items per page:
+                  <select [(ngModel)]="itemsPerPage">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                  </select>
+                </label>
+              </div>
+              <div class="col-md-4 col-6 p-3">
+                <pagination-controls
+                  (pageChange)="p = $event"
+                ></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

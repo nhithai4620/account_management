@@ -1,0 +1,85 @@
+@import 'local/partials/avatar';
+@import 'local/mixins/media';
+@import 'config/breakpoints';
+@import 'config/color';
+@import 'local/partials/form-btn';
+
+.main {
+    margin: 0 auto;
+    font-size: 1.8rem;
+    padding: 0 10px;
+    width: 58%;
+
+    @include maxWidth($screen-lg) {
+        width: 70%;
+    }
+
+    @include maxWidth($screen-md) {
+        width: 80%;
+    }
+
+    @include maxWidth($screen-sm) {
+        width: 90%;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 18px;
+        box-shadow: 1px 1px 8px 0 grey;
+        height: auto;
+        margin-top: 6%;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin: 50px 0px 10px;
+    }
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: $primary;
+    border-radius: 18px;
+}
+
+.avatar-card {
+    @include avatar(200px);
+}
+
+.main .card table {
+    border: none;
+    font-size: 1rem;
+    height: 270px;
+    width: 80%;
+
+    td:first-child {
+        font-weight: bold;
+    }
+}
+
+
+
+.button-group {
+    margin-top: 50px;
+    @include form-btn($primary)
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.back-button {
+    margin: 60px 0px 10px;
+
+    i {
+        font-size: 1.5rem;
+    }
+
+    span {
+        font-size: 1.5rem;
+    }
+}

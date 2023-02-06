@@ -1,0 +1,37 @@
+@import "local/mixins/media";
+@import "config/breakpoints";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow-x: hidden;
+  padding: 50px 5%;
+  background-image: linear-gradient(62deg, #9ec8f3a5 0%, #eeeaf1b6 100%);
+}
+
+html {
+  font-size: 100%;
+}
+
+@include maxWidth($screen-lg) {
+  html {
+    font-size: 80%;
+  }
+
+  body {
+    padding: 10px 3%;
+  }
+}
+
+@include maxWidth($screen-sm) {
+  html {
+    font-size: 60%;
+  }
+
+  body {
+    padding: 10px 2%;
+  }
+}

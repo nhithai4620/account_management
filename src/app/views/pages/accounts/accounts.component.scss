@@ -1,0 +1,186 @@
+@import 'config/color';
+@import 'local/partials';
+@import 'local/mixins/media';
+@import 'config/breakpoints';
+@import 'local/partials/list';
+
+
+.accounts__toggle-switch,
+.accounts__add-account {
+    height: 100%;
+    float: right;
+}
+
+.accounts__header {
+    margin-bottom: 20px;
+
+    h1 {
+        font-weight: bold;
+        margin: 10px 0px;
+    }
+}
+
+.accounts__search {
+    width: 100%;
+    @include search(100%);
+}
+
+.accounts__add-account {
+    button {
+        @include button($primary, 150px, $light);
+    }
+}
+
+.accounts__list {
+    height: 58vh;
+    overflow-y: scroll;
+    @include table;
+
+    i {
+        cursor: pointer;
+    }
+}
+
+.accounts__paginations {
+    label {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 15px;
+
+        select {
+            padding: 5px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 1px solid $primary;
+        }
+    }
+
+    pagination-controls {
+        float: right;
+        font-size: 1.2rem;
+    }
+}
+
+.accounts__option {
+    @include dropdown;
+}
+
+.avatar {
+    @include avatar(40px);
+}
+
+.avatar-card {
+    @include avatar(100px);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.cards {
+    overflow-y: scroll;
+    height: 59vh;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(32.4%, 1fr));
+    grid-template-rows: 150px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    gap: 10px 20px;
+    justify-content: center;
+    background-color: rgb(249, 249, 249);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 5px;
+    max-height: 150px;
+    @include dropdown2;
+
+    &__avatar {
+        flex: 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__infor {
+        flex: 64%;
+        padding: 15px 0px;
+
+        p {
+            padding-top: 5px;
+        }
+    }
+}
+
+::ng-deep .mat-button-toggle-group {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+
+    .mat-button-toggle {
+        flex: 50%;
+        background-color: $gray;
+    }
+
+    .mat-button-toggle-checked {
+        i {
+            color: $light;
+        }
+
+        background-color: $primary;
+        color: $light;
+        font-weight: 500;
+    }
+}
+
+@include maxWidth($screen-lg) {
+
+    .accounts__toggle-switch {
+        float: left;
+    }
+
+    .accounts__toggle-switch,
+    .accounts__add-account {
+        margin-bottom: 5px;
+    }
+
+    ::ng-deep .mat-button-toggle-group {
+        width: 130px;
+    }
+
+    .accounts__paginations {
+        label {
+            margin-top: 5px;
+
+            select {
+                padding: 5px;
+                margin-left: 5px;
+            }
+        }
+    }
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+        0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cards.cdk-drop-list-dragging .card:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

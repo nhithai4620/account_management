@@ -1,0 +1,8 @@
+@mixin avatar($width) {
+    vertical-align: middle;
+    width: 100%;
+    max-width: $width;
+    max-height: $width;
+    height: auto;
+    border-radius: 50%;
+}

@@ -1,0 +1,64 @@
+@import 'config/breakpoints';
+@import 'config/color';
+@import "local/mixins/media";
+
+.wrap-content {
+    max-width: $desktop-width;
+    width: 100%;
+    height: 87vh;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: rgba(255, 255, 255, 0.636);
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+@include maxWidth($screen-lg) {
+    .wrap-content {
+        height: 98vh;
+    }
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+
+    &--1 {
+        overflow: hidden;
+        bottom: 75%;
+        right: 35%;
+        background-color: rgba(82, 200, 246, 0.484);
+        width: 150px;
+        height: 150px;
+    }
+
+    &--2 {
+        overflow: hidden;
+        bottom: 0%;
+        right: 60%;
+        background-color: rgba(254, 207, 215, 0.579);
+        width: 250px;
+        height: 250px;
+    }
+
+    &--3 {
+        overflow: hidden;
+        bottom: 35%;
+        right: 95%;
+        background-color: rgba(82, 211, 246, 0.534);
+        width: 150px;
+        height: 150px;
+    }
+
+    &--4 {
+        overflow: hidden;
+        bottom: 50%;
+        right: 10%;
+        background-color: rgba(254, 207, 215, 0.733);
+        width: 350px;
+        height: 350px;
+
+    }
+
+}
